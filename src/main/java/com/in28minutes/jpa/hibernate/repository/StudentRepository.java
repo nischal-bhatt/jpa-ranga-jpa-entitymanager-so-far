@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.in28minutes.jpa.hibernate.entity.Course;
+import com.in28minutes.jpa.hibernate.entity.Passport;
 import com.in28minutes.jpa.hibernate.entity.Student;
 
 @Repository
@@ -33,6 +33,15 @@ public class StudentRepository {
 
 		return student;
 
+	}
+	
+	public void saveStudentWithPassport()
+	{
+		Passport p = new Passport("Z");
+		em.persist(p);
+		Student s = new Student ("nish");
+		s.setPassport(p);
+		em.persist(s);
 	}
 
 	

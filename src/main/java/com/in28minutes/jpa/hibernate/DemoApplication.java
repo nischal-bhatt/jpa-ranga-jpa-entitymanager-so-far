@@ -48,6 +48,8 @@ public class DemoApplication implements CommandLineRunner {
 		prepository.save(new Passport("222"));
 		rrepository.save(new Review("1","hello"));
 		rrepository.save(new Review("2","hehe"));
+		
+		srepository.saveStudentWithPassport();
 		// repository.save(new Course("jpa"));
 		// repository.save(new Course("rrr"));
 		// Course course = repository.findById(2L);
