@@ -42,7 +42,7 @@ public class StudentRepository {
 		Student s = new Student ("nish");
 		s.setPassport(p);
 		em.persist(s);
-	}
+	}//hibernate is lazy
 
 	
 
