@@ -1,5 +1,6 @@
 package com.in28minutes.jpa.hibernate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.in28minutes.jpa.hibernate.entity.Course;
+import com.in28minutes.jpa.hibernate.entity.FullTimeEmployee;
+import com.in28minutes.jpa.hibernate.entity.PartTimeEmployee;
 import com.in28minutes.jpa.hibernate.entity.Passport;
 import com.in28minutes.jpa.hibernate.entity.Review;
 import com.in28minutes.jpa.hibernate.entity.Student;
 import com.in28minutes.jpa.hibernate.repository.CourseRepository;
+import com.in28minutes.jpa.hibernate.repository.EmployeeRepository;
 import com.in28minutes.jpa.hibernate.repository.PassportRepository;
 import com.in28minutes.jpa.hibernate.repository.ReviewRepository;
 import com.in28minutes.jpa.hibernate.repository.StudentRepository;
@@ -36,6 +40,9 @@ public class DemoApplication implements CommandLineRunner {
 	
 	@Autowired 
 	private ReviewRepository rrepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -87,7 +94,12 @@ public class DemoApplication implements CommandLineRunner {
 		srepository.insertStudentAndCourse(new Student("ahmad"),new Course("ole"));
 	
 	    //now retrive back the data above
+		
+		employeeRepository.insert(new PartTimeEmployee("jill",new BigDecimal("60")));
+		employeeRepository.insert(new FullTimeEmployee("jack",new BigDecimal("10000")));
+		
 	
+		logger.info("employees -> {}",employeeRepository.retrieveAllEmployees());
 	}
 
 }
