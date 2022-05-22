@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.in28minutes.jpa.hibernate.entity.Course;
 import com.in28minutes.jpa.hibernate.entity.Passport;
 import com.in28minutes.jpa.hibernate.entity.Student;
 
@@ -64,6 +65,36 @@ public class StudentRepository {
 		//queries fired at end of transaction, end of method
 	}
 
+	public void insertStudentAndCourse()
+	{
+		Student ss = new Student("jack");
+		Course cc = new Course("Micro");
+		em.persist(ss);
+		em.persist(cc);
+		
+		ss.addCourse(cc);
+		cc.addStudents(ss);
+		
+		em.persist(ss);
+		
+	}
+	
+	public void insertStudentAndCourse(Student student,Course course)
+	{
+		//Student ss = new Student("jack");
+		//Course cc = new Course("Micro");
+		
+		student.addCourse(course);
+		course.addStudents(student);
+		
+		em.persist(student);
+		em.persist(course);
+		
+		
+		
+		
+		
+	}
 	
 
 }

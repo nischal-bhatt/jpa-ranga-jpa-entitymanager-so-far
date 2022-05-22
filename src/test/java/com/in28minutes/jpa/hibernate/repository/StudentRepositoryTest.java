@@ -57,6 +57,22 @@ class StudentRepositoryTest {
 		logger.info("student hmm-> {}",pport.getStudent());
 	}
 	
+	@Test
+	@Transactional
+	public void retrieveStudentAndCourse() {
+		Student student = em.find(Student.class, 22L);
+		logger.info("student->{}",student);
+		logger.info("courses->{}",student.getCourses());
+		
+		
+		//any 1 to 1 relationship is always eager fetch
+		//but we can change to lazy 
+		//we got the passport details even though we did not request for it
+		//Passport pport=em.find(Passport.class, 11L);
+		
+		//logger.info("student hmm-> {}",pport.getStudent());
+	}
+	
 	
 	
 	

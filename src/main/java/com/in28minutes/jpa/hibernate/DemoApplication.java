@@ -83,6 +83,11 @@ public class DemoApplication implements CommandLineRunner {
 
 		// repository.save(new Course("Microservices kin 100 stes"));
 
+		srepository.insertStudentAndCourse();
+		srepository.insertStudentAndCourse(new Student("ahmad"),new Course("ole"));
+	
+	    //now retrive back the data above
+	
 	}
 
 }
