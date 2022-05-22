@@ -34,6 +34,7 @@ class StudentRepositoryTest {
 		//if u dont put @Transactional at the start of a method,
 		// each call is like its own transaction
 		//remove the above transactional from the method and see wehat happen
+		//lazy initialization exception
 		Student s = em.find(Student.class, 12L);
 		//persistence context (student)
 		Passport p =s.getPassport();
