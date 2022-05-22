@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -52,7 +54,50 @@ class CriteriaQueryTest {
 		logger.info("typed  -> {}",resultList);
 	}
 
+	@Test
+	public void all_courses_without_students() {
+		
+		CriteriaBuilder criteriaBuilder=em.getCriteriaBuilder();
+		CriteriaQuery<Course> cq=criteriaBuilder.createQuery(Course.class);
+		Root<Course> courseRoot =cq.from(Course.class);
+		Predicate like = criteriaBuilder.isEmpty(courseRoot.get("students"));
+		cq.where(like);
+		TypedQuery<Course> query = 
+				em.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+		logger.info("typed  -> {}",resultList);
+	}
 	
 	
-
+	
+	@Test
+	public void join() {
+		
+		CriteriaBuilder criteriaBuilder=em.getCriteriaBuilder();
+		CriteriaQuery<Course> cq=criteriaBuilder.createQuery(Course.class);
+		Root<Course> courseRoot =cq.from(Course.class);
+		//Predicate like = criteriaBuilder.isEmpty(courseRoot.get("students"));
+		Join<Object,Object> join=courseRoot.join("students");
+		//cq.where(like);
+		TypedQuery<Course> query = 
+				em.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+		logger.info("typed  -> {}",resultList);
+	}
+	
+	@Test
+	public void leftjoin() {
+		
+		CriteriaBuilder criteriaBuilder=em.getCriteriaBuilder();
+		CriteriaQuery<Course> cq=criteriaBuilder.createQuery(Course.class);
+		Root<Course> courseRoot =cq.from(Course.class);
+		//Predicate like = criteriaBuilder.isEmpty(courseRoot.get("students"));
+		Join<Object,Object> join=courseRoot.join("students",JoinType.LEFT);
+		//cq.where(like);
+		TypedQuery<Course> query = 
+				em.createQuery(cq.select(courseRoot));
+		List<Course> resultList = query.getResultList();
+		logger.info("typed  -> {}",resultList);
+	}
+	
 }
