@@ -25,26 +25,15 @@ class StudentRepositoryTest {
 	EntityManager em;
 	
 	@Test
-	@Transactional //the moment u create a transaction, you are creating
+	//@Transactional //the moment u create a transaction, you are creating
 	               // a persistence context
 	public void someTest()
 	{
-		//whenever we call a method on the entitymanager, what we are playing with
-		//is the persistencecontext
-		//if u dont put @Transactional at the start of a method,
-		// each call is like its own transaction
-		//remove the above transactional from the method and see wehat happen
-		//lazy initialization exception
-		Student s = em.find(Student.class, 12L);
-		//persistence context (student)
-		Passport p =s.getPassport();
-		//persistence context (student,passport)
-		p.setName("G50");
-		//persistence context (student,passport++)
-		s.setName("payalrohatgi");
-		//persistence context (student++,passport++)
-		//queries fired at end of transaction, end of method
+		studentRepository.someOperationToUnderstandPersistenceContext();
+		//notice now the above no need @Transactional coz student repo alrd has transactional anno
 	}
+
+	
 	
 	@Test
 	@Transactional

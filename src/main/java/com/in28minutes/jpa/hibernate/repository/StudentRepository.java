@@ -45,6 +45,24 @@ public class StudentRepository {
 	}//hibernate is lazy
 
 	
+	public void someOperationToUnderstandPersistenceContext() {
+		//whenever we call a method on the entitymanager, what we are playing with
+		//is the persistencecontext
+		//if u dont put @Transactional at the start of a method,
+		// each call is like its own transaction
+		//remove the above transactional from the method and see wehat happen
+		//lazy initialization exception
+		Student s = em.find(Student.class, 12L);
+		//persistence context (student)
+		//in hibernate , session = persistence context
+		Passport p =s.getPassport();
+		//persistence context (student,passport)
+		p.setName("G50");
+		//persistence context (student,passport++)
+		s.setName("payalrohatgi");
+		//persistence context (student++,passport++)
+		//queries fired at end of transaction, end of method
+	}
 
 	
 
