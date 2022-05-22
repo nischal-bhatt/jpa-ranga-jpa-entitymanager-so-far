@@ -1,5 +1,7 @@
 package com.in28minutes.jpa.hibernate.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.in28minutes.jpa.hibernate.entity.Course;
+import com.in28minutes.jpa.hibernate.entity.Review;
 
 @Repository
 @Transactional
@@ -68,6 +71,35 @@ public class CourseRepository {
 		
 		Course course4 = findById(3L);
 		course4.setName("updated by dane");
+		
+	}
+
+	public void addReviewsForCourse() {
+		Course course = this.findById(2L);
+		logger.info("retrieving nish....{}",course.getReviews());
+		Review review = new Review("77","Great hands on stuff");
+		Review review2 = new Review("79","ranga is the best");
+		
+		course.addReview(review);
+		review.setCourse(course);
+		
+		course.addReview(review2);
+		review2.setCourse(course);
+		em.persist(review);
+		em.persist(review2);
+		
+	}
+	//get it working, and then make it good
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+		Course course = this.findById(courseId);
+		
+		for (Review review: reviews)
+		{
+			
+			course.addReview(review);
+			review.setCourse(course);
+			em.persist(review);
+		}
 		
 	}
 
