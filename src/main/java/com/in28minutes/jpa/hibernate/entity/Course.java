@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -28,7 +29,7 @@ public class Course {
 	@Column(name = "FullnAme", nullable = true)
 	private String name;
 
-	@OneToMany(mappedBy="course")
+	@OneToMany(mappedBy="course" /*fetch=FetchType.EAGER*/)
 	private List<Review> reviews = new ArrayList<>();
 
 	@UpdateTimestamp
