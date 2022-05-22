@@ -1,17 +1,11 @@
 package com.in28minutes.jpa.hibernate.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Passport {
@@ -20,13 +14,24 @@ public class Passport {
 	@GeneratedValue
 	private Long id;
 
-	@Column( nullable=false)
+	@Column(nullable = false)
 	private String number;
 
-	
-	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="passport")
+	//this means that student is the owning side of the relationship
+	//add mapped by on the non owning side of the relationship
+	private Student student;
+
 	public Passport() {
-      // need to have a no args constructor for jpa
+		// need to have a no args constructor for jpa
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Passport(String number) {
@@ -51,7 +56,4 @@ public class Passport {
 		return "passport [number=" + number + "]";
 	}
 
-	
-
-	
 }
