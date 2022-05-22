@@ -62,3 +62,34 @@ class StudentRepositoryTest {
 	
 
 }
+
+
+
+
+  //what happens in a transaction? 
+  //unit testing --> repo --> entitymanager
+  // uinit testing --> entitiymanager
+
+   /*
+    *    @Transactional
+    *    void someMethodWithChange( 
+    *    {
+    *    
+    *    //create objects
+    *       em.persist(user1); firing insert
+    *       // here, the object itself doesnt get persisted
+    *       // but rather only a seq is generated for NOW
+    *       em.persiste(user2);
+    *       
+    *       //change user1  firing update
+    *       //change user2
+    *      }//all changes are saved down to the databse
+    * 
+    * when do the queries get fired?
+    * hibernate waits until the last possible moment before
+    * it would persist the changes
+    * why does hibernate wait until the last moment to persist?
+    * coz lets say some of the updates fail.. 
+    */
+//if you really wanna push some of tghe chnages to db earilier, just use em.flush
+// @Transactional -- whenever u r making a change on the db -- u def need a transaction
