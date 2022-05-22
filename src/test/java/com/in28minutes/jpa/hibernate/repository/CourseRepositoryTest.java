@@ -42,6 +42,7 @@ class CourseRepositoryTest {
 	
 	@Test
 	@DirtiesContext
+	//if any unit test is updating data, jus add @DirtiesContext
 	public void save_basic() {
 		
 		Course course = courseRepository.findById(2L);
