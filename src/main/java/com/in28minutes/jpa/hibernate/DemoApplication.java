@@ -99,7 +99,10 @@ public class DemoApplication implements CommandLineRunner {
 		employeeRepository.insert(new FullTimeEmployee("jack",new BigDecimal("10000")));
 		
 	
-		logger.info("employees -> {}",employeeRepository.retrieveAllEmployees());
+	    //	logger.info("employees -> {}",employeeRepository.retrieveAllEmployees());
+	
+		logger.info("employees part time -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+		logger.info("employees full time -> {}", employeeRepository.retrieveAllFullTimeEmployees());
 	}
 
 }

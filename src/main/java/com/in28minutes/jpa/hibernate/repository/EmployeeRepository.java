@@ -10,8 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.in28minutes.jpa.hibernate.entity.Course;
 import com.in28minutes.jpa.hibernate.entity.Employee;
+import com.in28minutes.jpa.hibernate.entity.FullTimeEmployee;
+import com.in28minutes.jpa.hibernate.entity.PartTimeEmployee;
 
 @Repository
 @Transactional
@@ -34,7 +35,15 @@ public class EmployeeRepository {
 		
 	}
 
+	public List<PartTimeEmployee> retrieveAllPartTimeEmployees() {
+		return em.createQuery("select e from PartTimeEmployee e",PartTimeEmployee.class).getResultList();
+		
+	}
 	
+	public List<FullTimeEmployee> retrieveAllFullTimeEmployees() {
+		return em.createQuery("select e from FullTimeEmployee e",FullTimeEmployee.class).getResultList();
+		
+	}
 
 	
 
